@@ -1,0 +1,19 @@
+package Analizadores;
+
+import java_cup.runtime.*;
+
+class Parser;
+
+/** Simbolos terminales **/
+
+terminal NUMBER, pareni, parend, coma, pcoma, ID;
+
+/** Simbolos no terminales **/
+
+
+start with Expresion;
+
+Expresion ::= ESTUDIANTE pareni NUMBER coma ID coma NUMBER parend
+            | Expresion pcoma Expresion
+            | ID
+            | NUMBER;
