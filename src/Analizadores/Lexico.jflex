@@ -1,4 +1,4 @@
-package Analizadores
+package Analizadores;
 
 import java_cup.runtime.*;
 
@@ -28,11 +28,30 @@ whitespace = [ \t\n]
 
 %%
 
-{ID}+ { return symbol(ParserSym.NUMBER, Integer.valueOf(yytext())); }
-"(" {return symbol(ParserSym.pareni, yytext()); }
-")" {return symbol(ParserSym.parend, yytext()); }
-";" {return symbol(ParserSym.pcoma, yytext()); }
-"," {return symbol(ParserSym.coma, yytext()); }
+{ID}        { return symbol(ParserSym.ID, Integer.valueOf(yytext())); }
+{NOMBRE}    { return symbol(ParserSym.nombre, yytext()); }
+"("         { return symbol(ParserSym.pareni, yytext()); }
+")"         { return symbol(ParserSym.parend, yytext()); }
+";"         { return symbol(ParserSym.pcoma, yytext()); }
+","         { return symbol(ParserSym.coma, yytext()); }
+
+<YYINITIAL> "CURSO"             {   System.out.println("Reconocido: <<"+yytext()+">>, rvoid");
+                                return symbol(ParserSym.curso, yytext());}
+
+<YYINITIAL> "ESTUDIANTE"             {   System.out.println("Reconocido: <<"+yytext()+">>, rvoid");
+                                return symbol(ParserSym.estudiante, yytext());}
+
+<YYINITIAL> "BUSCAR_ESTUDIANTE"             {   System.out.println("Reconocido: <<"+yytext()+">>, rvoid");
+                                return symbol(ParserSym.bestudiante, yytext());}
+
+<YYINITIAL> "ELIMINAR_ESTUDIANTE"             {   System.out.println("Reconocido: <<"+yytext()+">>, rvoid");
+                                return symbol(ParserSym.eestudiante, yytext());}
+
+<YYINITIAL> "MOSTRAR_ESTUDIANTE"             {   System.out.println("Reconocido: <<"+yytext()+">>, rvoid");
+                                return symbol(ParserSym.mestudiante, yytext());}
+
+<YYINITIAL> "MOSTRAR_CURSOS"             {   System.out.println("Reconocido: <<"+yytext()+">>, rvoid");
+                                return symbol(ParserSym.mcurso, yytext());}
 
 {whitespace}+ { /* skip white spaces */ }
 [^]                             {throw new Error("Cadena ilegal <"+
